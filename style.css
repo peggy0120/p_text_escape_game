@@ -72,3 +72,10 @@ body {
     color: #fff;
     background-color: #666
 }
+
+@media only screen and (max-width: 600px) {
+    .btn-grid {
+        grid-template-columns: repeat(1, auto);
+        grid-row-gap: 32px;
+    }
+}
