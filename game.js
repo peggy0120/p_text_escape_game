@@ -4,6 +4,7 @@ $(document).ready(function () {
     var optionBtns = $('#option-buttons')
     var language = "en"
     var sect = "0"
+    var personality = "orig"
     var fadeDelay = 0
     var storySection = [
         {
@@ -287,6 +288,12 @@ $(document).ready(function () {
     function loadContent(sectionItems) {
 
         $.each(sectionItems, function () {
+
+            if (this.item_type == "agent_speech") {
+                if (this.agent_personality !== personality) {
+                    return true;
+                }
+            }
 
             content.append("<div class='item' style='display:none;'> </div>")
 
