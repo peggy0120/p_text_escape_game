@@ -187,6 +187,21 @@ $(document).ready(function () {
 
     var result = []
 
+    function setLanguage() {
+
+        $("#lang_en").click(function () {
+            language = "en"
+            $('html').attr('lang', 'en');
+            startGame()
+        })
+
+        $("#lang_ja").click(function () {
+            language = "ja"
+            $('html').attr('lang', 'ja');
+            startGame()
+        })
+    }
+
     function startGame() {
 
         console.log("STARTED")
@@ -247,7 +262,13 @@ $(document).ready(function () {
 
             item.addClass(this.item_type)
 
-            item.text(this.text_en)
+            if (language == "en") {
+                item.text(this.text_en)
+            } else {
+                item.text(this.text_ja)
+                item.addClass('ja')
+            }
+
 
         })
     }
@@ -267,8 +288,17 @@ $(document).ready(function () {
             }
 
             this.text_en = this.text_en.replace('[[', '')
+            this.text_ja = this.text_ja.replace('[[', '')
             this.text_en = this.text_en.replace(']]', '')
-            btn.text(this.text_en)
+            this.text_ja = this.text_ja.replace(']]', '')
+
+            if (language == "en") {
+                btn.text(this.text_en)
+            } else {
+                btn.text(this.text_ja)
+                btn.addClass('ja')
+            }
+
             next.push(this.sect_next)
 
         })
@@ -327,7 +357,7 @@ $(document).ready(function () {
         })
         console.log(storySection)
 
-        startGame()
+        setLanguage()
     }
 
     function parseData(url, callback) {

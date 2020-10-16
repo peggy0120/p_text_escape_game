@@ -2,7 +2,7 @@
 *::before,
 *::after {
     box-sizing: border-box;
-    font-family: Roboto Mono;
+    font-family: 'Roboto Mono', 'Noto Sans JP', sans-serif;
     font-size: 1.1rem;
 }
 
@@ -16,18 +16,29 @@ body {
 .container {
     margin: 0 auto;
     max-width: 800px;
-    padding-top: 64px;
+    width: 80%;
+    padding-top: 48px;
     padding-bottom: 64px;
+}
+
+.ja {
+    font-family: 'Noto Sans JP', sans-serif;
 }
 
 .item {
     margin: 40px 0;
     font-weight: 400;
+    line-height: 2.0;
 }
 
 .agent_speech {
     font-weight: 600;
     font-style: italic;
+}
+
+.agent_speech.ja {
+    font-weight: 700;
+    font-style: normal;
 }
 
 .btn-grid {
