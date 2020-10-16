@@ -1,0 +1,177 @@
+sect_id,section_name,item_id,item_type,is_agent_option,sect_next,agent_personality,text_en,text_ja
+0,name,0,description,-,-,-,You wake up in a dark room.,あなたは、真っ暗な部屋の中で目を覚ます。
+0,name,1,description,-,-,-,You can't remember who you are or what happened before.,自分が誰なのか、何が起きたのかも思い出せない。
+0,name,2,description,-,-,-,*… bzzzt*,*…ブルル*
+0,name,3,description,-,-,-,There's a small vibration from your smartwatch.,スマートウォッチから軽い振動が伝わってくる。
+0,name,4,description,-,-,-,"You reach for the screen, and suddenly a voice pops-up:",スクリーンに手を伸ばすと、突然、メッセージが浮かび上がる：
+0,name,5,agent_speech,-,-,orig,"The Voice: ""Hello, my name is KAI. I'm your AI assistant here at Alpha Research Center. To begin, please state your name.""",謎の声：「私はカイです。ここ、アルファ・リサーチ・センターであなたをサポートするAIアシスタントです。サポートを開始するには、声に出して名前を教えてください。」
+0,name,5,agent_speech,-,-,butler,,「私、カイと申します。ここ、アルファ・リサーチ・センターであなたをサポートさせていただくAIアシスタントです。失礼ですが、お名前を頂戴してもよろしいでしょうか？お声に出して教えてください。」
+0,name,5,agent_speech,-,-,friend,,「私の名前はカイ！ここ、アルファ・リサーチ・センターで君をお助けするAIアシスタントだよ。サポートを始めるから、君の名前を声に出して教えて！」
+0,name,-,option,TRUE,1,-,"[[""I don't remember it""]]",[[「覚えていません」]]
+0,name,-,option,FALSE,1,-,"[[""my name?""]]",[[「名前？」]]
+1,fingerprint,0,agent_speech,-,-,orig,"KAI: ""My voice analysis confirms that your voice matches one of the employee records in my database.""",カイ：「声の分析から、あなたが私のデータベースに登録されている、ここの従業員の一人と確認できました。」 
+1,fingerprint,0,agent_speech,-,-,butler,,「声を分析したところ、あなたが私のデータベースに登録されている、ここの従業員の一人と確認できました。」 
+1,fingerprint,0,agent_speech,-,-,friend,,「声を調べてみたら、君が私のデータベースに載ってる、ここの従業員の一人だと確認できたよ。」 
+1,fingerprint,1,agent_speech,-,-,orig,"KAI: ""But I'll need another authentication to retrieve your files, such as your fingerprint.""",カイ：「でも、あなたのファイルを取り込むには、指紋など、追加の認証データが必要です。」
+1,fingerprint,1,agent_speech,-,-,butler,,
+1,fingerprint,1,agent_speech,-,-,friend,,
+1,fingerprint,-,option,TRUE,2,-,[[Put your finger on the watch]],[[指をスマートウォッチに押し当てる]]
+1,fingerprint,-,option,FALSE,2,-,[[Do nothing]],[[何もしない]]
+2,lockdown,0,description,-,-,-,"Suddenly, you start hearing a loud siren from outside the room.",突然、部屋の外で大きなサイレンが鳴り始める。
+2,lockdown,1,description,-,-,-,You wonder what just happened.,一体、何が起きたのだろう。
+2,lockdown,2,agent_speech,-,-,orig,"KAI: ""That's the signal for building lockdown. My access to the system and database has also been partially disabled.""",カイ：「建物がロックダウンされた合図です。システムやデータベースに接続する私のアクセス権も一部が無効化されました。」
+2,lockdown,2,agent_speech,-,-,butler,,
+2,lockdown,2,agent_speech,-,-,friend,,
+2,lockdown,3,agent_speech,-,-,orig,"KAI: ""It's most likely just a false alarm like always, though.""",カイ：「恐らく、良くある誤認警報でしょう。」
+2,lockdown,3,agent_speech,-,-,butler,,
+2,lockdown,3,agent_speech,-,-,friend,,
+2,lockdown,-,option,FALSE,3.1,-,"[[""How can you be so sure?""]]",[[「本当にそう？」]]
+2,lockdown,-,option,TRUE,3,-,"[[""What should we do next?""]]",[[「では、どうしたらいい？」]]
+3.1,its-fine,0,agent_speech,-,-,orig,"KAI: ""I didn’t see any suspicious activity. I also haven't seen anyone in the building before.""",カイ：「不審な動きは見られませんでした。建物内にも、事前に人の姿は見られませんでした。」
+3.1,its-fine,0,agent_speech,-,-,butler,,
+3.1,its-fine,0,agent_speech,-,-,friend,,
+3.1,its-fine,1,_pointer,-,3,-,>> next,>> next
+3,follow-me,0,agent_speech,-,-,orig,"KAI: ""The system can only be restored manually via the machines in the server room since I can't sign you in remotely now.""",カイ：「現在、あなたをリモート接続することができません。システムの復旧は、サーバールームの機械から手動で行うしかありません。」
+3,follow-me,0,agent_speech,-,-,butler,,
+3,follow-me,0,agent_speech,-,-,friend,,
+3,follow-me,1,agent_speech,-,-,orig,"KAI: ""I’ll guide you there, but you’ll have to follow my direction.""",カイ：「ご案内します。私の指示に従ってください。」
+3,follow-me,1,agent_speech,-,-,butler,,
+3,follow-me,1,agent_speech,-,-,friend,,
+3,follow-me,2,option,TRUE,4,-,[[“Sounds good. Let’s go to the server room”]],[[「分かった。サーバールームへ案内して。」]]
+3,follow-me,3,option,FALSE,4,-,[[“... okay? But can you turn the light on first?”]],[[「事情は分かったけど、まずは電気をつけられる？」]]
+4,power-outage,0,agent_speech,-,-,orig,"KAI: ""Okay. I have the floorplan on my local storage, but let me turn on the light for you first.""",カイ：「承知しました。ローカル・ストレージにフロアの見取り図がありますが、その前に電気をつけます。」
+4,power-outage,0,agent_speech,-,-,butler,,
+4,power-outage,0,agent_speech,-,-,friend,,
+4,power-outage,1,description,-,-,-,...,...
+4,power-outage,2,description,-,-,-,...,...
+4,power-outage,3,description,-,-,-,"On your right, a faint green light turns on with a pop sound. Below the sign is an emergency exit.",「ポンッ」と音をたてて、右に緑色の明かりがほのかに点灯する。その誘導灯の下には非常口がある。
+4,power-outage,4,description,-,-,-,The rest of the room is still pitch-dark.,他に明かりはなく、部屋は闇に包まれたまま。
+4,power-outage,5,agent_speech,-,-,orig,"KAI: ""The power went down as well. Don’t take the emergency exit. There is a door on your left that will lead to the stairs we should take.""",カイ：「停電中です。非常口ではなく、左にあるドアを開けて階段へと向かってください。」
+4,power-outage,5,agent_speech,-,-,butler,,
+4,power-outage,5,agent_speech,-,-,friend,,
+4,power-outage,6,option,FALSE,5.1,-,[[Walk over to the emergency exit on the right]],[[右の非常口へ向かう。]]
+4,power-outage,7,option,TRUE,5.2,-,[[Find the other door on the left]],[[左の別のドアを探す。]]
+5.1,door-right,0,description,-,-,-,You press the emergency exit door open on your right.,右の非常ドアを開く
+5.1,door-right,1,_pointer,-,5,-,>> next,>> next
+5.2,door-left,0,description,-,-,-,You walk to the left while putting your hand in front of you.,前方を手で探りながら左へ向かう。
+5.2,door-left,1,description,-,-,-,"Within just a few seconds, you can feel your hand touching a metal doorknob.",すぐに、手が金属製のドアノブに触れる。　
+5.2,door-left,2,_pointer,-,5,-,>> next,>> next
+5,left-the-room,0,description,-,-,-,Behind the door is a long corridor with the same fainted emergency exit sign at the end.,ドアの奥には長い廊下が続き、突き当りには別の非常口を示す誘導灯がぼんやりと浮かび上がっている。
+5,left-the-room,1,description,-,-,-,The sign shows a stair and an arrow pointing to the right.,誘導灯には階段と、右向きの矢印が書かれている。
+5,left-the-room,2,description,-,-,-,But there are stairs on each side of the sign.,しかし、階段は誘導灯の右にも左にもある。
+5,left-the-room,3,agent_speech,-,-,orig,"KAI: ""You should take the left stairs. It’s closer to the server room.""",カイ：「左の階段を進んでください。サーバールームへの近道です。」
+5,left-the-room,3,agent_speech,-,-,butler,,
+5,left-the-room,3,agent_speech,-,-,friend,,
+5,left-the-room,4,option,TRUE,6,-,[[Take the stairs on the left]],[[左の階段を進む]]
+5,left-the-room,5,option,FALSE,6,-,[[Take the stairs on the right]],[[右の階段を進む]]
+6,down-the-stairs,0,description,-,-,-,"Slowly and carefully making your way down in the dark, you manage to reach the floor the server room is on.",暗闇の中、ゆっくりと慎重に階段を下り、サーバールームのあるフロアに辿り着く。　
+6,down-the-stairs,1,description,-,-,-,But before you is a locked door that requires a key card to enter the room.,ところが、目の前には施錠されたドアがあり、中に入るにはカードキーが必要だ。
+6,down-the-stairs,2,description,-,-,-,There's also a passage on each side of the door.,ドアの両側には通路もある。
+6,down-the-stairs,3,description,-,-,-,Each connects to a different workspace.,それぞれが違うワークスペースへと続いている。
+6,down-the-stairs,4,agent_speech,-,-,orig,"KAI: ""The records I have shows that more employees sit in the workspace on the left. It's more likely you'll find a key card there.""",カイ：私の記録によると、従業員の多くは左のワークスペースを使うため、カードキーは恐らく左のワークスペースにあるでしょう。
+6,down-the-stairs,4,agent_speech,-,-,butler,,
+6,down-the-stairs,4,agent_speech,-,-,friend,,
+6,down-the-stairs,5,option,TRUE,7,-,[[Enter the left passage]],[[左の通路を進む]]
+6,down-the-stairs,6,option,FALSE,7,-,[[Enter the right passage]],[[右の通路を進む]]
+7,workspace,0,description,-,-,-,The passage leads you to an open workspace with a few glass cubicles and rows of desks around them.,通路は開かれたワークスペースにつながっていて、ガラスのパーティションで仕切られた作業スペースがいくつかあり、その周りには机が何列か並んでいる。
+7,workspace,1,description,-,-,-,You find the space oddly familiar to you.,その空間にどことなく見覚えがある。
+7,workspace,2,description,-,-,-,Could this be where you work?,自分が働いていた場所？
+7,workspace,3,description,-,-,-,"Most of the desks are empty, with only a meeting device on them.",机にはほとんど荷物はなく、会議用のスピーカーマイクのみが置かれている。
+7,workspace,4,description,-,-,-,You stop in front of one and realize that it’s powered on.,その一つの前で足を止めると、電源が入っていることに気づく。
+7,workspace,5,agent_speech,-,-,orig,"KAI: ""You don't want to touch those devices. The system may recognize you as an intruder and block more access.""",カイ：「それらのデバイスには手を触れない方が良いでしょう。システムが外部からの侵入者と認識して、アクセスを更に妨害するかもしれません。」
+7,workspace,5,agent_speech,-,-,butler,,
+7,workspace,5,agent_speech,-,-,friend,,
+7,workspace,6,option,FALSE,8.1,-,[[press the meet button]],[[「参加」ボタンを押す]]
+7,workspace,7,option,TRUE,8.2,-,[[walk away from the device]],[[デバイスから離れる]]
+8.1,button-yes,0,description,-,-,-,"Upon pressing the button, nothing really happens, but suddenly the led on the bottom of the device starts blinking rapidly.",ボタンを押しても何も起こらない。しかし、次の瞬間、デバイスの下にあるLEDが素早く点滅し始める。
+8.1,button-yes,1,description,-,-,-,You pick it up from the table but find a post-it note under it.,テーブルから持ち上げると、下の付箋に気づく。
+8.1,button-yes,2,_pointer,-,8,-,>> next,>> next
+8.2,button-no,0,description,-,-,-,You leave the device as it is.,デバイスには手を触れず、そのままにしておく。
+8.2,button-no,1,description,-,-,-,"However, you notice something falls from the desk as you walk past it.",しかし、通りすがりに、机から何か落ちたのが目に入る。
+8.2,button-no,2,description,-,-,-,It's a post-it note that writes –,落ちたのは付箋で、こう書かれていたー　
+8.2,button-no,3,_pointer,-,8,-,>> next,>> next
+8,they-are-listening,0,description,-,-,-,"""STOP. THEY ARE LISTENING""",【待て。奴らが聞いてる。】
+8,they-are-listening,1,description,-,-,-,"That's a weird note, you murmur.",「変なメモ」とあなたは小声でつぶやく
+8,they-are-listening,2,agent_speech,-,-,orig,"KAI: ""What is it? I didn't recognize what you said.""",カイ：「何でしょう？良く聞こえませんでした。」
+8,they-are-listening,2,agent_speech,-,-,butler,,
+8,they-are-listening,2,agent_speech,-,-,friend,,
+8,they-are-listening,3,option,TRUE,9.1,-,[[Tell KAI about the note]],[[カイにメモのことを伝える]]
+8,they-are-listening,4,option,FALSE,9,-,"[[""Nevermind""]]",[[「何でもない」]]
+9.1,told-kai-yes,0,agent_speech,-,-,orig,"KAI: ""Huh. It's probably just one of the meeting notes left by the employee.”",カイ：「きっと、従業員の誰かが置いて行った会議のメモか何かでしょう。」
+9.1,told-kai-yes,0,agent_speech,-,-,butler,,
+9.1,told-kai-yes,0,agent_speech,-,-,friend,,
+9.1,told-kai-yes,1,_pointer,-,9,-,>> next,>> next
+9,call,0,description,-,-,-,Suddenly there comes a sharp and uncomfortable ringing sound.,突然、激しい耳障りな音が鳴り響く。
+9,call,1,description,-,-,-,It's from the conference room on the other side of the floor.,同じフロアの反対側にある会議室から聞こえてくる。
+9,call,2,agent_speech,-,-,orig,"KAI: ""All the communication systems in this building are monitored. Having unauthorized communication can trigger a higher level of system lockdown.""",カイ：「この建物内の通信システムは全て監視されています。不正な通信が交わされると、より厳重なシステム・ロックダウンを招きます。」
+9,call,2,agent_speech,-,-,butler,,
+9,call,2,agent_speech,-,-,friend,,
+9,call,3,option,TRUE,10,-,[[Go answer the call]],[[呼び出しに応じる]]
+9,call,4,option,FALSE,10,-,[[Go hang up the call]],[[呼び出しには応じず、接続を切る]]
+10,meeting-room,0,description,-,-,-,"Running into the room, you try to find where the ringing sound comes from, but it stops abruptly before you can locate it.",部屋に駆け込んで音をたどるが、場所を特定する前に唐突に止んでしまう。
+10,meeting-room,1,description,-,-,-,"A box and a folder labeled with ""Project Terminus"" on the other end of the table grab your attention, however.",しかし、テーブルの反対側にある [プロジェクト・ターミナス（最終プロジェクト）]とラベルの貼られた箱とフォルダーが目に入る。
+10,meeting-room,2,description,-,-,-,You open the folder.,フォルダーを開ける。
+10,meeting-room,3,description,-,-,-,"Pages of activity logs with detailed location and communication records appear, including extensive chat logs, but they’ve been heavily redacted.",詳細なチャット記録を含む、場所や通信内容を詳しく記載した活動記録が何ページも出てきたが、大幅に編集されていた。　
+10,meeting-room,4,description,-,-,-,"These are surveillance reports of someone from the lab, you realize.",それが研究所の誰かを監視した調査記録であると気づく。
+10,meeting-room,5,description,-,-,-,"On the top-right corner of each page, it marks a 12-digit ID: 1656-0708-1899.",各ページの右上に12桁のID番号が記されている：1656-0708-1899。
+10,meeting-room,6,agent_speech,-,-,orig,"KAI: ""Are you reading something? I can remember them for you. I'll sync with the server to find related information once the connection is re-established.""",カイ：「何かを読んでいますか？私が記憶しましょうか？接続が復旧したら、サーバーと同期して関連情報を検索します。」
+10,meeting-room,6,agent_speech,-,-,butler,,
+10,meeting-room,6,agent_speech,-,-,friend,,
+10,meeting-room,7,option,TRUE,13,-,[[Ask KAI to save the ID]],[[カイにIDを保存してもらう]]
+10,meeting-room,8,option,FALSE,13,-,"[[""Nevermind""]]",[[「何でもない」]]
+13,the-names,0,description,-,-,-,At the end of the report is a group photo.,レポートの最後に、グループ写真が載っている。
+13,the-names,1,description,-,-,-,It's you on the far right in the photo!,写真の右端に写っているのはあなた！
+13,the-names,2,description,-,-,-,But you can't recall who the others are even though they look familiar.,ところが、一緒に写っている他の人物の顔に見覚えがあるものの、誰なのか思い出せない。
+13,the-names,3,description,-,-,-,"On the backside of the photo have some names on there: SAM, ARI, RAY...",写真の裏に、いくつか名前が書かれている：サム、アリ、レイ・・・
+13,the-names,4,agent_speech,-,-,orig,"KAI: ""I can look up some information for you as well. I still have some records stored in my local storage.""",カイ：「何かお調べしましょうか？ローカル・ストレージにまだ少し記録が残っています。」
+13,the-names,4,agent_speech,-,-,butler,,
+13,the-names,4,agent_speech,-,-,friend,,
+13,the-names,5,option,TRUE,14.1,-,[[Ask KAI to look up the names]],[[カイに名前を伝えて調べてもらう]]
+13,the-names,6,option,FALSE,14,-,"[[""Nevermind""]]",[[「何でもない」]]
+14.1,told-kai-names,0,agent_speech,-,-,orig,"KAI: ""They are employees here at Alpha Research Center as well, but I don’t have further info until the server connection is re-established.""",カイ： 「彼らはこのアルファ・リサーチ・センターの従業員ですが、それ以上はサーバー接続が復旧しないと分かりません。」
+14.1,told-kai-names,0,agent_speech,-,-,butler,,
+14.1,told-kai-names,0,agent_speech,-,-,friend,,
+14.1,told-kai-names,1,_pointer,-,14,-,>> next,>> next
+14,the-key-cards,0,description,-,-,-,You pick up the box next to the folder.,フォルダーの隣りにある箱を手に取る。
+14,the-key-cards,1,description,-,-,-,There is a red and a blue key card in there.,中にはカードキーが２枚、赤と青。
+14,the-key-cards,2,description,-,-,-,Each of them also has a different code written on the bottom right.,それぞれ右下に異なるコードが表示されている。
+14,the-key-cards,3,description,-,-,-,The one on the blue keycard is the same as the one from the report.,青いカードキーに表示されたコードはレポートのものと一致する。
+14,the-key-cards,4,agent_speech,-,-,orig,"KAI: ""Those are the key cards! State the code if you want me to remember them.""",カイ：「カードキーを見つけましたね。私が記憶するので、コードを読み上げてください。」
+14,the-key-cards,4,agent_speech,-,-,butler,,
+14,the-key-cards,4,agent_speech,-,-,friend,,
+14,the-key-cards,5,option,TRUE,15,-,[[Read the codes to KAI]],[[カイにコードを読み上げる]]
+14,the-key-cards,6,option,FALSE,15,-,"[[""Nevermind""]]",[[「何でもない」]]
+15,server-room,0,description,-,-,-,"With the keycards in your hand, you start making your way back, walking past the empty desks, and those meet devices again.",２枚のカードキーを手に、空いている机や会議用デバイスの横を通り、またドアの方へ引き返す。
+15,server-room,1,description,-,-,-,"Returning to the locked door, now you have to choose from the red and the blue keycard.",施錠されたドアの前で、赤か青のキーカード、どちらかを選ばなくてはならない。
+15,server-room,2,agent_speech,-,-,orig,"KAI: ""Use the blue keycard. That one should grant you the most access.""",カイ：「青いカードを使ってください。赤より多くの情報にアクセスできます。」
+15,server-room,2,agent_speech,-,-,butler,,
+15,server-room,2,agent_speech,-,-,friend,,
+15,server-room,3,option,FALSE,16,-,[[Use the red card]],[[赤いカードを使う]]
+15,server-room,4,option,TRUE,16,-,[[Use the blue card]],[[青いカードを使う]]
+16,which-console,0,description,-,-,-,"Walking through the door, you find yourself in front of rows of equipment and machines.",部屋に入ると、目の前に機械や設備が何列も並んでいる。
+16,which-console,1,description,-,-,-,It's much colder here. Looks like at least the back-up power is still working.,他の場所よりずっと気温が低いが、少なくとも非常用の電源はまだ供給されているようだ。　
+16,which-console,2,description,-,-,-,At the end of the rows is a wall full of monitors and 2 security consoles in each corner.,機械の列の後ろには、壁一面にモニターが並び、セキュリティー・コンソールが２つ、部屋の隅にそれぞれ設置されている。
+16,which-console,3,agent_speech,-,-,orig,KAI: “The left console should be the one that can restore the system.”,カイ：「左がシステムを復旧するコンソールです。」
+16,which-console,3,agent_speech,-,-,butler,,
+16,which-console,3,agent_speech,-,-,friend,,
+16,which-console,4,option,TRUE,17,-,[[Use the left console]],[[左のコンソールを使う]]
+16,which-console,5,option,FALSE,17,-,[[Use the right console]],[[右にコンソールを使う]]
+17,the-sensor,0,description,-,-,-,"Standing in front of the console, you see a sensor with a label saying, ""hold your keycard still for a few seconds.""",コンソールの前に立つと、「カードキーを数秒間、動かさずにかざしてください」とラベルの貼られたセンサーが目に入る。
+17,the-sensor,1,agent_speech,-,-,orig,"KAI: “You can just hold your watch close to the sensor. That should activate the console with your own identity.""",カイ：「センサーにスマートウォッチを近づければ、あなたのIDでコンソールを起動できます。」
+17,the-sensor,1,agent_speech,-,-,butler,,
+17,the-sensor,1,agent_speech,-,-,friend,,
+17,the-sensor,2,option,TRUE,18,-,[[Hold your watch next to the sensor]],[[センサーにスマートウォッチをかざす]]
+17,the-sensor,3,option,FALSE,18,-,[[Use the keycard]],[[カードキーを使う]]
+18,fingerprint-again,0,description,-,-,-,"After a -ding- sound, the monitor turns on with an input box on there.",「ポン」という短いトーンに続いてモニターがつき、入力ボックスが表示される。
+18,fingerprint-again,1,description,-,-,-,"Suddenly, a message flashes on the screen —",すると突然、スクリーンにメッセージが光りだしたー
+18,fingerprint-again,2,description,-,-,-,THEY'RE STILL LISTENING. DON'T AUTHORIZE THE ACCESS. YOU HAVE THE CODE.,奴らは今も聞いてる。アクセスを許可してはいけない。コードはあなたが持っている。
+18,fingerprint-again,3,description,-,-,-,It only shows a few seconds before the monitor goes back to having the input box only.,メッセージは数秒後には消えて、その後はまた入力ボックスのみがスクリーンに表示されている。
+18,fingerprint-again,4,agent_speech,-,-,orig,"KAI: ""You can also just provide your fingerprint for access.""",カイ：「指紋認証でもアクセスが可能です。」
+18,fingerprint-again,4,agent_speech,-,-,butler,,
+18,fingerprint-again,4,agent_speech,-,-,friend,,
+18,fingerprint-again,5,option,TRUE,19,-,[[Put your finger on the watch]],[[指をスマートウォッチに押し当てる]]
+18,fingerprint-again,6,option,FALSE,19,-,[[Enter the code on the key card]],[[カードキーに表示されているコードを入力する]]
+19,end,0,description,-,-,-,The light starts flashing rapidly in the building.,建物内のライトが激しく点滅し始める。
+19,end,1,description,-,-,-,"But suddenly, the room returns to pitch dark.",そして突然、室内は再び暗闇に包まれた。
+19,end,2,description,-,-,-,"On the monitor, a message appears:",モニターにメッセージが浮かび上がる：
+19,end,3,description,-,-,-,"""Welcome back, Ray (Employee 1656-0708-1899)...""",「レイさん（従業員番号 1656-0708-1899）、おかえりなさい。」

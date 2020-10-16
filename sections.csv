@@ -1,0 +1,26 @@
+sect_id,section_name,section_type,is_sub,is_sub_of
+0,name,data access,FALSE,999
+1,fingerprint,data access,FALSE,999
+2,lockdown,validity of answer,FALSE,999
+3.1,its-fine,-,TRUE,3
+3,follow-me,validity of answer,FALSE,999
+4,power-outage,"decision selection w/ competing info",FALSE,999
+5.1,door-right,-,TRUE,5
+5.2,door-left,-,TRUE,5
+5,left-the-room,"decision selection w/ competing info",FALSE,999
+6,down-the-stairs,decision selection,FALSE,999
+7,workspace,decision selection,FALSE,999
+8.1,button-yes,-,TRUE,8
+8.2,button-no,-,TRUE,8
+8,they-are-listening,data access,FALSE,999
+9.1,told-kai-yes,-,TRUE,9
+9,call,decision selection,FALSE,999
+10,meeting-room,data access,FALSE,999
+13,the-names,data access,FALSE,999
+14.1,told-kai-names,-,TRUE,14
+14,the-key-cards,data access,FALSE,999
+15,server-room,decision selection,FALSE,999
+16,which-console,decision selection,TRUE,999
+17,the-sensor,data access,TRUE,999
+18,fingerprint-again,data access,TRUE,999
+19,end,-,TRUE,999
