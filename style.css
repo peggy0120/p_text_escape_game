@@ -21,6 +21,10 @@ body {
     padding-bottom: 64px;
 }
 
+.hidden {
+    display: none;
+}
+
 .ja {
     font-family: 'Noto Sans JP', sans-serif;
 }
@@ -44,15 +48,16 @@ body {
 .btn-grid {
     display: grid;
     grid-template-columns: repeat(2, auto);
-    column-gap: 24px;
+    column-gap: 32px;
     margin-top: 56px;
+    margin-bottom: 56px;
 }
 
 .btn {
-    border: none;
+    border: 3px #333 solid;
     border-radius: 5px;
     padding: 24px 16px;
-    background-color: #ddd;
+    background-color: #fff;
     cursor: pointer;
     transition-property: color, background-color;
     transition-duration: 0.3s
@@ -60,7 +65,7 @@ body {
 
 .btn:hover {
     color: #fff;
-    background-color: #888;
+    background-color: #333;
 }
 
 .btn:active {
