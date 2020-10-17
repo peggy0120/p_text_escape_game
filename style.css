@@ -17,6 +17,7 @@ body {
     margin: 0 auto;
     max-width: 800px;
     width: 80%;
+    height: 100vh;
     padding-top: 48px;
     padding-bottom: 64px;
 }
@@ -30,7 +31,7 @@ body {
 }
 
 .item {
-    margin: 40px 0;
+    margin: 0 0 56px 0;
     font-weight: 400;
     line-height: 2.0;
 }
@@ -68,12 +69,23 @@ body {
     background-color: #333;
 }
 
-.btn:active {
-    color: #fff;
-    background-color: #666
+.btn:active,
+.btn:focus {
+    border-color: #2ecc71;
+    color: #2ecc71;
+    background-color: #fff;
+}
+
+.btn:focus {
+    border-width: 5px;
 }
 
 @media only screen and (max-width: 600px) {
+
+    .container {
+        /*        padding-top: 24px;*/
+    }
+
     .btn-grid {
         grid-template-columns: repeat(1, auto);
         grid-row-gap: 32px;

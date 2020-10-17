@@ -2,10 +2,12 @@ $(document).ready(function () {
 
     var content = $('#content')
     var optionBtns = $('#option-buttons')
+
     var language = "en"
-    var sect = "0"
     var personality = "orig"
-    var fadeDelay = 0
+
+    var sect = "0"
+
     var storySection = [
         {
             "sect_id": 0,
@@ -207,12 +209,18 @@ $(document).ready(function () {
 
         $('button').fadeOut(2000)
 
-        console.log("STARTED")
+        console.log("------- GAME START -------")
 
         var next = []
 
         loadSection(sect)
 
+    }
+
+    function endGame() {
+        $('.container').delay(800).empty()
+
+        console.log("------ END OF GAME -------")
     }
 
     function loadSection(sectionId) {
@@ -223,7 +231,7 @@ $(document).ready(function () {
         content.delay(800).empty()
         optionBtns.delay(800).empty()
 
-        console.log("SECTION: " + sect)
+        console.log("*SECTION: " + sect)
         var section = storySection.find(storySection => storySection.sect_id == sectionId)
 
         result.push({
@@ -246,25 +254,41 @@ $(document).ready(function () {
         }
 
         loadContent(section.sect_items)
-        loadBtns(section.sect_options)
-        showSection()
 
-        $(".btn").click(function () {
+        if (sect == "19") {
+            loadFinalBtn()
+        } else {
+            loadBtns(section.sect_options)
+        }
 
-            $(".btn").fadeOut(600)
+        var fadeDelay = 600
+        showSection(fadeDelay)
+        console.log("next sections:" + next)
+
+        $(".opt").click(function () {
+
+            $(".opt").fadeOut(600)
 
             if ($(this).is(':first-of-type')) {
                 result[result.length - 1]['sect_option'] = 0
                 sect = next[0]
+                console.log("user clicked left opt")
             } else {
                 result[result.length - 1]['sect_option'] = 1
                 sect = next[1]
+                console.log("user clicked right opt")
             }
 
-            console.log("click:" + sect)
+
             console.log(result[result.length - 1])
 
             loadSection(sect)
+        })
+
+        $(".final").click(function () {
+            $(".content").fadeOut(600)
+            $(".final").fadeOut(600)
+            endGame()
         })
 
     }
@@ -302,9 +326,9 @@ $(document).ready(function () {
             item.addClass(this.item_type)
 
             if (language == "en") {
-                item.text(this.text_en)
+                item.text(this.text_en.replace(/\\n/g, "<br />"))
             } else {
-                item.text(this.text_ja)
+                item.text(this.text_ja.replace(/\\n/g, "<br />"))
                 item.addClass('ja')
             }
         })
@@ -317,7 +341,7 @@ $(document).ready(function () {
         $.each(sectionOpts, function () {
 
             optionBtns.hide()
-            optionBtns.append("<button class='btn'></button>")
+            optionBtns.append("<button class='btn opt'></button>")
 
             var btn = optionBtns.children().last()
 
@@ -340,17 +364,21 @@ $(document).ready(function () {
             next.push(this.sect_next)
 
         })
-
-        console.log("buttons loaded")
     }
 
-    function showSection() {
+    function loadFinalBtn() {
 
-        fadeDelay = 600;
+        optionBtns.hide()
+        optionBtns.append("<button class='btn final'>See Your Final Results</button>")
+
+        optionBtns.attr("grid-template-columns", "repeat(1, auto)")
+    }
+
+    function showSection(fadeDelay) {
 
         $('div.item').each(function () {
 
-            $(this).delay(fadeDelay).fadeIn(600)
+            $(this).delay(fadeDelay).fadeIn(800)
 
             //            $("body,html").delay(fadeDelay).animate({
             //                scrollTop: $(this).offset().top
@@ -360,8 +388,6 @@ $(document).ready(function () {
         })
 
         optionBtns.delay(fadeDelay - 3000).fadeIn(600)
-
-        console.log("next sections:" + next)
     }
 
     function cleanData(data) {
@@ -388,8 +414,8 @@ $(document).ready(function () {
 
             var section = storySection.find(storySection => storySection.sect_id == sectId)
             var item = this
-            delete item.sect_id
 
+            delete item.sect_id
 
             if (this.item_type == "option") {
                 delete this.agent_personality
@@ -413,6 +439,7 @@ $(document).ready(function () {
             }
 
         })
+        console.log('***PARSED DATA***')
         console.log(storySection)
 
         setLanguage()
@@ -423,6 +450,7 @@ $(document).ready(function () {
             download: true,
             header: true,
             complete: function (results) {
+                console.log('***RAW DATA***')
                 console.log(results);
                 callback(results.data)
 
