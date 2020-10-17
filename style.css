@@ -15,7 +15,7 @@ body {
 
 .container {
     margin: 0 auto;
-    max-width: 800px;
+    max-width: 680px;
     width: 80%;
     height: 100vh;
     padding-top: 48px;
@@ -31,19 +31,53 @@ body {
 }
 
 .item {
-    margin: 0 0 56px 0;
+    margin: 0 0 48px 0;
     font-weight: 400;
     line-height: 2.0;
 }
 
 .agent_speech {
+    font-size: 1.25rem;
+    padding-left: 56px;
+    padding-right: 56px;
+}
+
+.agent_speech:not(.ja) {
     font-weight: 600;
     font-style: italic;
 }
 
+.agent_speech.butler:not(.ja) {
+    font-family: 'Spectral', serif;
+}
+
+.agent_speech.friend:not(.ja) {
+    font-family: 'Work Sans', sans-serif;
+}
+
 .agent_speech.ja {
-    font-weight: 700;
     font-style: normal;
+}
+
+.agent_speech.ja.butler {
+    font-weight: 700;
+    font-family: 'Noto Serif JP', serif;
+}
+
+.agent_speech.ja.friend {
+    font-weight: 700;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+
+.agent_speech > .kai {
+    font-style: normal;
+    display: flex;
+    margin-left: -56px;
+    margin-right: 24px;
+}
+
+.agent_speech:not(ja) > .kai.first {
+    margin-bottom: 24px;
 }
 
 .btn-grid {
@@ -57,7 +91,7 @@ body {
 .btn {
     border: 3px #333 solid;
     border-radius: 5px;
-    padding: 24px 16px;
+    padding: 24px 12px;
     background-color: #fff;
     cursor: pointer;
     transition-property: color, background-color;
@@ -84,6 +118,17 @@ body {
 
     .container {
         /*        padding-top: 24px;*/
+    }
+
+    .agent_speech {
+        font-size: 1.2rem;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .agent_speech > .kai {
+        margin-left: -16px;
+        margin-bottom: 24px;
     }
 
     .btn-grid {

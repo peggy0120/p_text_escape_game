@@ -4,7 +4,8 @@ $(document).ready(function () {
     var optionBtns = $('#option-buttons')
 
     var language = "en"
-    var personality = "orig"
+    var personality = ["orig", "butler", "friend"]
+    var psnlOpt = 0;
 
     var sect = "0"
 
@@ -190,7 +191,9 @@ $(document).ready(function () {
 
     var result = []
 
-    function setLanguage() {
+    function preGame() {
+
+        setPersonality()
 
         $("#lang_en").click(function () {
             language = "en"
@@ -203,6 +206,11 @@ $(document).ready(function () {
             $('html').attr('lang', 'ja');
             startGame()
         })
+    }
+
+    function setPersonality() {
+        psnlOpt = Math.floor(Math.random() * 2) + 1
+        console.log("Personality set to: " + personality[psnlOpt])
     }
 
     function startGame() {
@@ -311,10 +319,12 @@ $(document).ready(function () {
 
     function loadContent(sectionItems) {
 
+        var last_is_speech = false
+
         $.each(sectionItems, function () {
 
             if (this.item_type == "agent_speech") {
-                if (this.agent_personality !== personality) {
+                if (this.agent_personality !== personality[psnlOpt]) {
                     return true;
                 }
             }
@@ -326,11 +336,41 @@ $(document).ready(function () {
             item.addClass(this.item_type)
 
             if (language == "en") {
-                item.text(this.text_en.replace(/\\n/g, "<br />"))
+                item.html(this.text_en.replace(/\\n/g, "<br />"))
+                item.html(this.text_en.replace(/ ([^ ]*)$/, '&nbsp;$1'))
             } else {
-                item.text(this.text_ja.replace(/\\n/g, "<br />"))
+                item.html(this.text_ja.replace(/\\n/g, "<br />"))
                 item.addClass('ja')
             }
+
+            if (this.item_type == "agent_speech") {
+
+                item.addClass(personality[psnlOpt])
+
+                if (!last_is_speech) {
+
+                    if (sect == "0") {
+                        if (language == "en") {
+                            item.prepend("<div class='kai first'>The Voice:</div>")
+                        } else {
+                            item.prepend("<div class='kai first'>謎の声：</div>")
+                        }
+
+                    } else {
+                        if (language == "en") {
+                            item.prepend("<div class='kai'>KAI:</div>")
+                        } else {
+                            item.prepend("<div class='kai'>カイ：</div>")
+                        }
+                    }
+
+                    last_is_speech = true
+                }
+            } else {
+                last_is_speech = false
+            }
+
+
         })
     }
 
@@ -438,7 +478,7 @@ $(document).ready(function () {
         console.log('***PARSED DATA***')
         console.log(storySection)
 
-        setLanguage()
+        preGame()
     }
 
     function parseData(url, callback) {
