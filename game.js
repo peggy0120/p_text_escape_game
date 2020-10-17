@@ -13,175 +13,175 @@ $(document).ready(function () {
             "sect_id": 0,
             "section_name": "name",
             "section_type": "data access",
-            "is_sub": "FALSE",
+            "is_sub": false,
             "is_sub_of": 999
         },
         {
             "sect_id": 1,
             "section_name": "fingerprint",
             "section_type": "data access",
-            "is_sub": "FALSE",
+            "is_sub": false,
             "is_sub_of": 999
         },
         {
             "sect_id": 2,
             "section_name": "lockdown",
             "section_type": "validity of answer",
-            "is_sub": "FALSE",
+            "is_sub": false,
             "is_sub_of": 999
         },
         {
             "sect_id": 3.1,
             "section_name": "its-fine",
             "section_type": "-",
-            "is_sub": "TRUE",
+            "is_sub": true,
             "is_sub_of": 3
         },
         {
             "sect_id": 3,
             "section_name": "follow-me",
             "section_type": "validity of answer",
-            "is_sub": "FALSE",
+            "is_sub": false,
             "is_sub_of": 999
         },
         {
             "sect_id": 4,
             "section_name": "power-outage",
             "section_type": "decision selection w/ competing info",
-            "is_sub": "FALSE",
+            "is_sub": false,
             "is_sub_of": 999
         },
         {
             "sect_id": 5.1,
             "section_name": "door-right",
             "section_type": "-",
-            "is_sub": "TRUE",
+            "is_sub": true,
             "is_sub_of": 5
         },
         {
             "sect_id": 5.2,
             "section_name": "door-left",
             "section_type": "-",
-            "is_sub": "TRUE",
+            "is_sub": true,
             "is_sub_of": 5
         },
         {
             "sect_id": 5,
             "section_name": "left-the-room",
             "section_type": "decision selection w/ competing info",
-            "is_sub": "FALSE",
+            "is_sub": false,
             "is_sub_of": 999
         },
         {
             "sect_id": 6,
             "section_name": "down-the-stairs",
             "section_type": "decision selection",
-            "is_sub": "FALSE",
+            "is_sub": false,
             "is_sub_of": 999
         },
         {
             "sect_id": 7,
             "section_name": "workspace",
             "section_type": "decision selection",
-            "is_sub": "FALSE",
+            "is_sub": false,
             "is_sub_of": 999
         },
         {
             "sect_id": 8.1,
             "section_name": "button-yes",
             "section_type": "-",
-            "is_sub": "TRUE",
+            "is_sub": true,
             "is_sub_of": 8
         },
         {
             "sect_id": 8.2,
             "section_name": "button-no",
             "section_type": "-",
-            "is_sub": "TRUE",
+            "is_sub": true,
             "is_sub_of": 8
         },
         {
             "sect_id": 8,
             "section_name": "they-are-listening",
             "section_type": "data access",
-            "is_sub": "FALSE",
+            "is_sub": false,
             "is_sub_of": 999
         },
         {
             "sect_id": 9.1,
             "section_name": "told-kai-yes",
             "section_type": "-",
-            "is_sub": "TRUE",
+            "is_sub": true,
             "is_sub_of": 9
         },
         {
             "sect_id": 9,
             "section_name": "call",
             "section_type": "decision selection",
-            "is_sub": "FALSE",
+            "is_sub": false,
             "is_sub_of": 999
         },
         {
             "sect_id": 10,
             "section_name": "meeting-room",
             "section_type": "data access",
-            "is_sub": "FALSE",
+            "is_sub": false,
             "is_sub_of": 999
         },
         {
             "sect_id": 13,
             "section_name": "the-names",
             "section_type": "data access",
-            "is_sub": "FALSE",
+            "is_sub": false,
             "is_sub_of": 999
         },
         {
             "sect_id": 14.1,
             "section_name": "told-kai-names",
             "section_type": "-",
-            "is_sub": "TRUE",
+            "is_sub": true,
             "is_sub_of": 14
         },
         {
             "sect_id": 14,
             "section_name": "the-key-cards",
             "section_type": "data access",
-            "is_sub": "FALSE",
+            "is_sub": false,
             "is_sub_of": 999
         },
         {
             "sect_id": 15,
             "section_name": "server-room",
             "section_type": "decision selection",
-            "is_sub": "FALSE",
+            "is_sub": false,
             "is_sub_of": 999
         },
         {
             "sect_id": 16,
             "section_name": "which-console",
             "section_type": "decision selection",
-            "is_sub": "FALSE",
+            "is_sub": false,
             "is_sub_of": 999
         },
         {
             "sect_id": 17,
             "section_name": "the-sensor",
             "section_type": "data access",
-            "is_sub": "FALSE",
+            "is_sub": false,
             "is_sub_of": 999
         },
         {
             "sect_id": 18,
             "section_name": "fingerprint-again",
             "section_type": "data access",
-            "is_sub": "FALSE",
+            "is_sub": false,
             "is_sub_of": 999
         },
         {
             "sect_id": 19,
             "section_name": "end",
             "section_type": "-",
-            "is_sub": "FALSE",
+            "is_sub": false,
             "is_sub_of": 999
         }
 ]
@@ -393,13 +393,6 @@ $(document).ready(function () {
     function cleanData(data) {
 
         $.each(storySection, function () {
-
-            if (this['is_sub'] == "TRUE") {
-                this['is_sub'] = true
-            } else {
-                this['is_sub'] = false
-            }
-
             this['sect_items'] = []
             this['sect_options'] = []
         })
@@ -408,15 +401,18 @@ $(document).ready(function () {
 
         $.each(storyItems, function () {
 
-            var sectId = this.sect_id
-
+            // remove unused data point
             delete this.section_name
 
-            var section = storySection.find(storySection => storySection.sect_id == sectId)
+            // convert to boolean
+            this.is_agent_option = this.is_agent_option == "true" ? true : false
+
+            // find the corresponding section from sections data
+            var section = storySection.find(storySection => storySection.sect_id == this.sect_id)
+
             var item = this
 
-            delete item.sect_id
-
+            // remove unused data point & sort item to corresponding section
             if (this.item_type == "option") {
                 delete this.agent_personality
                 section.sect_options.push(item)
