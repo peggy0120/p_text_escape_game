@@ -36,7 +36,7 @@ $(document).ready(function () {
         console.log("ACTIVATE AUTO PROGRESS")
     }
 
-    var sect = "19"
+    var sect = "0"
 
     var storyItems = []
 
@@ -138,8 +138,8 @@ $(document).ready(function () {
 
     function loadSection(sectionId) {
 
-        $('div.item').fadeOut(1200)
-        $('button').fadeOut(1200, function () {
+        $('div.item').fadeOut(1000)
+        $('button').fadeOut(1000, function () {
             $("html, body").animate({
                 scrollTop: 0
             }, "slow");
@@ -232,7 +232,7 @@ $(document).ready(function () {
                 }
             }
 
-            content.append("<div class='item' style='display:none;'> </div>")
+            content.append("<div class='item hidden'> </div>")
 
             var item = content.children().last()
 
@@ -284,8 +284,7 @@ $(document).ready(function () {
 
         $.each(sectionOpts, function () {
 
-            optionBtns.hide()
-            optionBtns.append("<button class='btn opt'></button>")
+            optionBtns.append("<button class='btn opt hidden'></button>")
 
             var btn = optionBtns.children().last()
 
@@ -312,7 +311,7 @@ $(document).ready(function () {
 
     function loadFinalBtn() {
 
-        optionBtns.hide()
+        optionBtns.addClass('hidden')
         optionBtns.append("<button class='btn final'>See Your Final Results</button>")
         optionBtns.removeClass('btn-grid')
 
@@ -324,11 +323,20 @@ $(document).ready(function () {
 
         fadeObj.each(function (index) {
 
+            var fadeItem = $(this)
+
             $(this).delay(fadeDelay).fadeIn(800)
 
-            //            $("body,html").delay(fadeDelay).animate({
-            //                scrollTop: $(this).offset().top
-            //            }, 600);
+            setTimeout(function () {
+
+                if (isOutOfViewport(fadeItem[0]).bottom) {
+                    $("body,html").animate({
+                        scrollTop: fadeItem.offset().top
+                    }, 800);
+                }
+
+            }, fadeDelay + 10)
+
 
             var estReadtime = calReadtime($(this).text())
             fadeDelay += estReadtime
@@ -337,15 +345,48 @@ $(document).ready(function () {
 
         fadeDelay -= 1000
 
-        optionBtns.delay(fadeDelay).fadeIn(800, function () {
+        $('.btn').delay(fadeDelay).fadeIn(800, function () {
+
             if (autoProg) {
                 setTimeout(function () {
                     optionBtns.children().first().trigger('click')
                 }, 3800)
             }
+
         })
 
+        setTimeout(function () {
+
+            $("body,html").animate({
+                scrollTop: $('.btn').first().offset().top
+            }, 1000);
+
+        }, fadeDelay + 10)
     }
+
+    /*!
+     * Check if an element is out of the viewport
+     * (c) 2018 Chris Ferdinandi, MIT License, https://gomakethings.com
+     * @param  {Node}  elem The element to check
+     * @return {Object}     A set of booleans for each side of the element
+     */
+    var isOutOfViewport = function (elem) {
+
+        // Get element's bounding
+        var bounding = elem.getBoundingClientRect();
+
+        // Check if it's out of the viewport on each side
+        var out = {};
+        out.top = bounding.top < 0;
+        out.left = bounding.left < 0;
+        out.bottom = bounding.bottom > (window.innerHeight || document.documentElement.clientHeight);
+        out.right = bounding.right > (window.innerWidth || document.documentElement.clientWidth);
+        out.any = out.top || out.left || out.bottom || out.right;
+        out.all = out.top && out.left && out.bottom && out.right;
+
+        return out;
+
+    };
 
     function calReadtime(text) {
 
