@@ -313,8 +313,7 @@ $(document).ready(function () {
 
     function loadFinalBtn() {
 
-        optionBtns.addClass('hidden')
-        optionBtns.append("<button class='btn final'>See Your Final Results</button>")
+        optionBtns.append("<button class='btn final hidden'>See Your Final Results</button>")
         optionBtns.removeClass('btn-grid')
 
     }

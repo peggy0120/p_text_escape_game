@@ -244,6 +244,10 @@ h1 span.resultPct {
         /*        padding-top: 24px;*/
     }
 
+    #content {
+        margin-top: 64px;
+    }
+
     .agent_speech {
         font-size: 1.2rem;
         padding-left: 16px;
