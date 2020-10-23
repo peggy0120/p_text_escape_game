@@ -17,6 +17,8 @@
 html,
 body {
     transition: easeInOutCubic;
+    background-color: #fff;
+    color: #0e1111;
 }
 
 body {
@@ -56,7 +58,7 @@ body {
 
 .overlap-shadow {
     transition: box-shadow 0.2s ease;
-    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1)
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1)
 }
 
 #bar {
@@ -160,8 +162,8 @@ body {
     padding: 24px 12px;
     background-color: #fff;
     cursor: pointer;
-    transition-property: color, background-color;
-    transition-duration: 0.25s
+    transition-property: color, border-color;
+    transition-duration: 0.2s
 }
 
 .btn.final {

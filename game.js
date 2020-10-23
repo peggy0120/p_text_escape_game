@@ -489,7 +489,9 @@ $(document).ready(function () {
 
         } else {
 
-            $('.bar-container').removeClass('overlap-shadow')
+            $('.bar-container').removeClass('overlap-shadow', {
+                duration: 200
+            })
 
         }
     })
