@@ -1,6 +1,8 @@
 $(document).ready(function () {
 
     var container = $('.container')
+    var barContainer = $('.bar-container')
+    var progress = $('#progress')
     var content = $('#content')
     var optionBtns = $('#option-buttons')
 
@@ -25,6 +27,7 @@ $(document).ready(function () {
         console.log("Personality randomly set to: " + personality[psnlOpt])
 
     }
+
 
     var sect = "0"
 
@@ -121,17 +124,25 @@ $(document).ready(function () {
 
         var next = []
 
+        barContainer.removeClass('hidden')
         loadSection(sect)
 
     }
 
     function loadSection(sectionId) {
 
-        $('div.item').fadeOut(600)
-        $('button').fadeOut(600)
+        $('div.item').fadeOut(1200)
+        $('button').fadeOut(1200, function () {
+            $("html, body").animate({
+                scrollTop: 0
+            }, "slow");
+            return false;
+        })
 
-        content.delay(800).empty()
-        optionBtns.delay(800).empty()
+        content.delay(1200).empty()
+        optionBtns.delay(1200).empty()
+
+        updateProgress()
 
         console.log("*SECTION: " + sect)
         var section = storySection.find(storySection => storySection.sect_id == sectionId)
@@ -194,6 +205,10 @@ $(document).ready(function () {
         var fadeDelay = 600
         showSection(fadeDelay)
         console.log("next sections:" + next)
+    }
+
+    function updateProgress() {
+        progress.width(progress.width() + progress.parent().width() / 17)
     }
 
     function loadContent(sectionItems) {
@@ -315,11 +330,10 @@ $(document).ready(function () {
         fadeDelay -= 1000
 
         optionBtns.delay(fadeDelay).fadeIn(800, function () {
-            //            setTimeout(function () {
-            //                optionBtns.children().first().trigger('click')
-            //            }, 3800)
+//            setTimeout(function () {
+//                optionBtns.children().first().trigger('click')
+//            }, 3800)
         })
-
 
     }
 
@@ -343,8 +357,8 @@ $(document).ready(function () {
                 }
             })
 
-            // 265 words per min
-            readTime = word.length / 265 * 60 * 1000
+            // 200 words per min
+            readTime = word.length / 200 * 60 * 1000
 
             // add 100ms for each word below 3 chars
             readTime += shortWordCount * 100
@@ -358,7 +372,7 @@ $(document).ready(function () {
             readTime = text.length / 500 * 60 * 1000
         }
 
-        readTime = readTime < 1000 ? 1000 : readTime
+        readTime = readTime < 1200 ? 1200 : readTime
 
         return readTime
     }
@@ -411,5 +425,18 @@ $(document).ready(function () {
     }
 
     parseData('story.csv', cleanData)
+
+    $(window).scroll(function () {
+
+        if ($(document).scrollTop() > 28) {
+
+            $('.bar-container').addClass('overlap-shadow')
+
+        } else {
+
+            $('.bar-container').removeClass('overlap-shadow')
+
+        }
+    })
 
 })
