@@ -8,6 +8,24 @@ $(document).ready(function () {
     var personality = ["orig", "butler", "friend"]
     var psnlOpt = 0;
 
+    const urlParams = new URLSearchParams(window.location.search)
+
+    if (urlParams.has('per') &&
+        (urlParams.get('per') == 1 || urlParams.get('per') == 2)
+    ) {
+
+        psnlOpt = urlParams.get('per')
+
+        console.log("Personality pre-set to: " + personality[psnlOpt])
+
+    } else {
+
+        psnlOpt = Math.floor(Math.random() * 2) + 1
+
+        console.log("Personality randomly set to: " + personality[psnlOpt])
+
+    }
+
     var sect = "0"
 
     var storyItems = []
@@ -81,8 +99,6 @@ $(document).ready(function () {
 
     function preGame() {
 
-        setPersonality()
-
         $("#lang_en").click(function () {
             language = "en"
             $('html').attr('lang', 'en');
@@ -94,11 +110,6 @@ $(document).ready(function () {
             $('html').attr('lang', 'ja');
             startGame()
         })
-    }
-
-    function setPersonality() {
-        psnlOpt = Math.floor(Math.random() * 2) + 1
-        console.log("Personality set to: " + personality[psnlOpt])
     }
 
     function startGame() {
@@ -304,9 +315,9 @@ $(document).ready(function () {
         fadeDelay -= 1000
 
         optionBtns.delay(fadeDelay).fadeIn(800, function () {
-//            setTimeout(function () {
-//                optionBtns.children().first().trigger('click')
-//            }, 3800)
+            //            setTimeout(function () {
+            //                optionBtns.children().first().trigger('click')
+            //            }, 3800)
         })
 
 
