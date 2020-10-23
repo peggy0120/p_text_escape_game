@@ -3,6 +3,7 @@ $(document).ready(function () {
     var container = $('.container')
     var barContainer = $('.bar-container')
     var progress = $('#progress')
+    var progLabel = $('.label_prog')
     var content = $('#content')
     var optionBtns = $('#option-buttons')
 
@@ -148,8 +149,6 @@ $(document).ready(function () {
         content.delay(1200).empty()
         optionBtns.delay(1200).empty()
 
-        updateProgress()
-
         console.log("*SECTION: " + sect)
         var section = storySection.find(storySection => storySection.sect_id == sectionId)
 
@@ -173,6 +172,8 @@ $(document).ready(function () {
         result.push({
             'sect_id': sect
         })
+
+        updateProgress()
 
         loadContent(section.sect_items)
 
@@ -215,6 +216,7 @@ $(document).ready(function () {
 
     function updateProgress() {
         progress.width(progress.width() + progress.parent().width() / 18)
+        progLabel.text(result.length)
     }
 
     function loadContent(sectionItems) {
@@ -368,11 +370,11 @@ $(document).ready(function () {
             // 200 words per min
             readTime = word.length / 200 * 60 * 1000
 
-            // add 100ms for each word below 3 chars
-            readTime += shortWordCount * 100
+            // add 150ms for each word below 3 chars
+            readTime += shortWordCount * 150
 
-            // add 200ms additionally for each word above 8 chars
-            readTime += longWordCount * 200
+            // add 300ms additionally for each word above 8 chars
+            readTime += longWordCount * 300
 
         } else {
 
@@ -380,7 +382,7 @@ $(document).ready(function () {
             readTime = text.length / 500 * 60 * 1000
         }
 
-        readTime = readTime < 1200 ? 1200 : readTime
+        readTime = readTime < 1500 ? 1500 : readTime
 
         return readTime
     }

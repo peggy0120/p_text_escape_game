@@ -62,6 +62,19 @@ body {
     border-radius: 5px;
 }
 
+#label {
+    float: left;
+    margin: 0 0 0 -72px;
+    display: flex;
+    align-items: center;
+    height: 16px;
+}
+
+#label > span {
+    font-size: 16px;
+    transition-duration: 0.25s;
+}
+
 #progress {
     width: 0%;
     height: 16px;

@@ -1,0 +1,25 @@
+0,name,KAI asked for you name.,data access,false,999
+1,fingerprint,KAI asked for you fingerprint.,data access,false,999
+2,lockdown,KAI informed you the lockdown was a false alarm.,validity of answer,false,999
+3.1,its-fine,,-,true,3
+3,follow-me,KAI asked you to follow them.,validity of answer,false,999
+4,power-outage,KAI informed you to take the door on your left.,decision selection w/ competing info,false,999
+5.1,door-right,,-,true,5
+5.2,door-left,,-,true,5
+5,left-the-room,KAI informed you to take the stairs on the left.,decision selection w/ competing info,false,999
+6,down-the-stairs,KAI informed you to go to the workspace on your left.,decision selection,false,999
+7,workspace,KAI suggested you don't touch the meeting device.,decision selection,false,999
+8.1,button-yes,,-,true,8
+8.2,button-no,,-,true,8
+8,they-are-listening,KAI asked you to repeat the note you found.,data access,false,999
+9.1,told-kai-yes,,-,true,9
+9,call,KAI suggested you don't answer the call.,decision selection,false,999
+10,meeting-room,KAI proposed to save the IDs for you.,data access,false,999
+13,the-names,KAI proposed to look up the names for you.,data access,false,999
+14.1,told-kai-names,,-,true,14
+14,the-key-cards,KAI proposed to remember the codes for you.,data access,false,999
+15,server-room,KAI suggested to use the blue keycard.,decision selection,false,999
+16,which-console,KAI informed you to use the left console.,decision selection,false,999
+17,the-sensor,KAI informed you to use your own identity to activate the console.,data access,false,999
+18,fingerprint-again,KAI asked for your fingerprint again.,data access,false,999
+19,end,,-,false,999
