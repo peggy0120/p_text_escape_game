@@ -29,6 +29,12 @@ $(document).ready(function () {
     }
 
 
+    var autoProg = false
+    if (urlParams.has('auto') && urlParams.get('auto') == 1) {
+        autoProg = true
+        console.log("ACTIVATE AUTO PROGRESS")
+    }
+
     var sect = "0"
 
     var storyItems = []
@@ -330,9 +336,11 @@ $(document).ready(function () {
         fadeDelay -= 1000
 
         optionBtns.delay(fadeDelay).fadeIn(800, function () {
-//            setTimeout(function () {
-//                optionBtns.children().first().trigger('click')
-//            }, 3800)
+            if (autoProg) {
+                setTimeout(function () {
+                    optionBtns.children().first().trigger('click')
+                }, 3800)
+            }
         })
 
     }
