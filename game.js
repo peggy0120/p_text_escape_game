@@ -214,7 +214,7 @@ $(document).ready(function () {
     }
 
     function updateProgress() {
-        progress.width(progress.width() + progress.parent().width() / 17)
+        progress.width(progress.width() + progress.parent().width() / 18)
     }
 
     function loadContent(sectionItems) {
