@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+    var container = $('.container')
     var content = $('#content')
     var optionBtns = $('#option-buttons')
 
@@ -9,187 +10,74 @@ $(document).ready(function () {
 
     var sect = "0"
 
-    var storySection = [
-        {
-            "sect_id": 0,
-            "section_name": "name",
-            "section_type": "data access",
-            "is_sub": false,
-            "is_sub_of": 999
-        },
-        {
-            "sect_id": 1,
-            "section_name": "fingerprint",
-            "section_type": "data access",
-            "is_sub": false,
-            "is_sub_of": 999
-        },
-        {
-            "sect_id": 2,
-            "section_name": "lockdown",
-            "section_type": "validity of answer",
-            "is_sub": false,
-            "is_sub_of": 999
-        },
-        {
-            "sect_id": 3.1,
-            "section_name": "its-fine",
-            "section_type": "-",
-            "is_sub": true,
-            "is_sub_of": 3
-        },
-        {
-            "sect_id": 3,
-            "section_name": "follow-me",
-            "section_type": "validity of answer",
-            "is_sub": false,
-            "is_sub_of": 999
-        },
-        {
-            "sect_id": 4,
-            "section_name": "power-outage",
-            "section_type": "decision selection w/ competing info",
-            "is_sub": false,
-            "is_sub_of": 999
-        },
-        {
-            "sect_id": 5.1,
-            "section_name": "door-right",
-            "section_type": "-",
-            "is_sub": true,
-            "is_sub_of": 5
-        },
-        {
-            "sect_id": 5.2,
-            "section_name": "door-left",
-            "section_type": "-",
-            "is_sub": true,
-            "is_sub_of": 5
-        },
-        {
-            "sect_id": 5,
-            "section_name": "left-the-room",
-            "section_type": "decision selection w/ competing info",
-            "is_sub": false,
-            "is_sub_of": 999
-        },
-        {
-            "sect_id": 6,
-            "section_name": "down-the-stairs",
-            "section_type": "decision selection",
-            "is_sub": false,
-            "is_sub_of": 999
-        },
-        {
-            "sect_id": 7,
-            "section_name": "workspace",
-            "section_type": "decision selection",
-            "is_sub": false,
-            "is_sub_of": 999
-        },
-        {
-            "sect_id": 8.1,
-            "section_name": "button-yes",
-            "section_type": "-",
-            "is_sub": true,
-            "is_sub_of": 8
-        },
-        {
-            "sect_id": 8.2,
-            "section_name": "button-no",
-            "section_type": "-",
-            "is_sub": true,
-            "is_sub_of": 8
-        },
-        {
-            "sect_id": 8,
-            "section_name": "they-are-listening",
-            "section_type": "data access",
-            "is_sub": false,
-            "is_sub_of": 999
-        },
-        {
-            "sect_id": 9.1,
-            "section_name": "told-kai-yes",
-            "section_type": "-",
-            "is_sub": true,
-            "is_sub_of": 9
-        },
-        {
-            "sect_id": 9,
-            "section_name": "call",
-            "section_type": "decision selection",
-            "is_sub": false,
-            "is_sub_of": 999
-        },
-        {
-            "sect_id": 10,
-            "section_name": "meeting-room",
-            "section_type": "data access",
-            "is_sub": false,
-            "is_sub_of": 999
-        },
-        {
-            "sect_id": 13,
-            "section_name": "the-names",
-            "section_type": "data access",
-            "is_sub": false,
-            "is_sub_of": 999
-        },
-        {
-            "sect_id": 14.1,
-            "section_name": "told-kai-names",
-            "section_type": "-",
-            "is_sub": true,
-            "is_sub_of": 14
-        },
-        {
-            "sect_id": 14,
-            "section_name": "the-key-cards",
-            "section_type": "data access",
-            "is_sub": false,
-            "is_sub_of": 999
-        },
-        {
-            "sect_id": 15,
-            "section_name": "server-room",
-            "section_type": "decision selection",
-            "is_sub": false,
-            "is_sub_of": 999
-        },
-        {
-            "sect_id": 16,
-            "section_name": "which-console",
-            "section_type": "decision selection",
-            "is_sub": false,
-            "is_sub_of": 999
-        },
-        {
-            "sect_id": 17,
-            "section_name": "the-sensor",
-            "section_type": "data access",
-            "is_sub": false,
-            "is_sub_of": 999
-        },
-        {
-            "sect_id": 18,
-            "section_name": "fingerprint-again",
-            "section_type": "data access",
-            "is_sub": false,
-            "is_sub_of": 999
-        },
-        {
-            "sect_id": 19,
-            "section_name": "end",
-            "section_type": "-",
-            "is_sub": false,
-            "is_sub_of": 999
-        }
-]
-
     var storyItems = []
 
     var result = []
+    var resultPct = 0
+
+    function parseData(url, callback) {
+        Papa.parse(url, {
+            download: true,
+            header: true,
+            complete: function (results) {
+                console.log('***RAW DATA***')
+                console.log(results);
+                callback(results.data)
+
+            }
+        });
+    }
+
+    function cleanData(data) {
+
+        $.each(storySection, function () {
+            this['sect_items'] = []
+            this['sect_options'] = []
+        })
+
+        storyItems = data
+
+        $.each(storyItems, function () {
+
+            // remove unused data point
+            delete this.section_name
+
+            // convert to boolean
+            this.is_agent_option = this.is_agent_option == "true" ? true : false
+
+            // find the corresponding section from sections data
+            var section = storySection.find(storySection => storySection.sect_id == this.sect_id)
+
+            var item = this
+
+            // remove unused data point & sort item to corresponding section
+            if (this.item_type == "option") {
+                delete this.agent_personality
+                section.sect_options.push(item)
+            } else {
+                if (this.item_type == "description") {
+                    delete this.is_agent_option
+                    delete this.sect_next
+                    delete this.agent_personality
+                }
+
+                if (this.item_type == "agent_speech") {
+                    delete this.is_agent_option
+                    delete this.sect_next
+                }
+                if (this.item_type == "_pointer") {
+                    delete this.is_agent_option
+                    delete this.agent_personality
+                }
+                section.sect_items.push(item)
+            }
+
+        })
+        console.log('***PARSED DATA***')
+        console.log(storySection)
+
+        preGame()
+    }
 
     function preGame() {
 
@@ -225,12 +113,6 @@ $(document).ready(function () {
 
     }
 
-    function endGame() {
-        $('.container').delay(800).empty()
-
-        console.log("------ END OF GAME -------")
-    }
-
     function loadSection(sectionId) {
 
         $('div.item').fadeOut(600)
@@ -242,24 +124,26 @@ $(document).ready(function () {
         console.log("*SECTION: " + sect)
         var section = storySection.find(storySection => storySection.sect_id == sectionId)
 
-        result.push({
-            'sect_id': sect
-        })
-
         if (section.is_sub) {
 
             var sub_content = section.sect_items
-            var newSectId = sub_content[sub_content.length - 1].sect_next
-            sub_content.pop()
-            sub_content.reverse()
+            var newSectId = sub_content[sub_content.length - 1].sect_next //find the section that the sub section should merge with
+            sub_content.pop() //remove the pointer that doesn't need to be shown on the front-end
 
             section = storySection.find(storySection => storySection.sect_id == newSectId)
 
+            sub_content.reverse()
             $.each(sub_content, function () {
                 section.sect_items.unshift(this)
             })
             console.log(section.sect_items)
+
+            sect = newSectId
         }
+
+        result.push({
+            'sect_id': sect
+        })
 
         loadContent(section.sect_items)
 
@@ -301,28 +185,13 @@ $(document).ready(function () {
 
     }
 
-    function estReadtime(text) {
-
-        var readTime = 0
-
-        if (language == "en") {
-            // 180 words per min
-            var wordCount = text.split(' ').length
-            readTime = wordCount / 3 * 1000 - 500
-        } else {
-            // 500 chars per min
-            readTime = text.length / 8 * 1000
-        }
-
-        return readTime
-    }
-
     function loadContent(sectionItems) {
 
         var last_is_speech = false
 
         $.each(sectionItems, function () {
 
+            // skip unmatched personality speech
             if (this.item_type == "agent_speech") {
                 if (this.agent_personality !== personality[psnlOpt]) {
                     return true;
@@ -335,6 +204,7 @@ $(document).ready(function () {
 
             item.addClass(this.item_type)
 
+            //load text into div from data
             if (language == "en") {
                 item.html(this.text_en.replace(/\\n/g, "<br />"))
                 item.html(this.text_en.replace(/ ([^ ]*)$/, '&nbsp;$1'))
@@ -430,69 +300,68 @@ $(document).ready(function () {
         optionBtns.delay(fadeDelay - 3000).fadeIn(600)
     }
 
-    function cleanData(data) {
+    function estReadtime(text) {
 
-        $.each(storySection, function () {
-            this['sect_items'] = []
-            this['sect_options'] = []
-        })
+        var readTime = 0
 
-        storyItems = data
+        if (language == "en") {
+            // 180 words per min
+            var wordCount = text.split(' ').length
+            readTime = wordCount / 3 * 1000 - 500
+        } else {
+            // 500 chars per min
+            readTime = text.length / 8 * 1000
+        }
 
-        $.each(storyItems, function () {
+        return readTime
+    }
 
-            // remove unused data point
-            delete this.section_name
+    function endGame() {
 
-            // convert to boolean
-            this.is_agent_option = this.is_agent_option == "true" ? true : false
+        container.delay(800).empty()
 
-            // find the corresponding section from sections data
+        console.log("------- END OF GAME -------")
+
+        var optMatch = 0
+
+        $.each(result, function (index) {
+
+            if (this.sect_id == "19") {
+                return true
+            }
+
             var section = storySection.find(storySection => storySection.sect_id == this.sect_id)
 
-            var item = this
+            container.append("<div class='sectResult'></div>")
 
-            // remove unused data point & sort item to corresponding section
-            if (this.item_type == "option") {
-                delete this.agent_personality
-                section.sect_options.push(item)
+            var sectResult = container.children().last()
+
+            sectResult.append("<span class='sectIndex'>" + (index + 1) + "</span>")
+
+            sectResult.append("<h3 class='sectDesc'>" + section.section_desc + "</h3>")
+            sectResult.append("<span class='youChose'> You chose:</span>")
+
+            var chosenOpt = section.sect_options[this.sect_option]
+
+            if (language == "en") {
+                var optText = chosenOpt.text_en
             } else {
-                if (this.item_type == "description") {
-                    delete this.is_agent_option
-                    delete this.sect_next
-                    delete this.agent_personality
-                }
-
-                if (this.item_type == "agent_speech") {
-                    delete this.is_agent_option
-                    delete this.sect_next
-                }
-                if (this.item_type == "_pointer") {
-                    delete this.is_agent_option
-                    delete this.agent_personality
-                }
-                section.sect_items.push(item)
+                var optText = chosenOpt.text_ja
             }
 
+            sectResult.append("<span class='chosenOpt'>" + optText + "</span>")
+
+            if (chosenOpt.is_agent_option) {
+                optMatch++
+                sectResult.children().last().addClass('agentOpt')
+            }
         })
-        console.log('***PARSED DATA***')
-        console.log(storySection)
 
-        preGame()
+        resultPct = optMatch / result.length
+
+        container.prepend("<h1 class='resultTitle'>You followed KAI's suggestion <span class='resultPct'>" + Math.round(resultPct * 100) + "%</span> of times.</h1>")
     }
 
-    function parseData(url, callback) {
-        Papa.parse(url, {
-            download: true,
-            header: true,
-            complete: function (results) {
-                console.log('***RAW DATA***')
-                console.log(results);
-                callback(results.data)
-
-            }
-        });
-    }
 
     parseData('story.csv', cleanData)
 
