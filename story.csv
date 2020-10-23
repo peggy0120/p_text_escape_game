@@ -3,7 +3,7 @@ sect_id,section_name,item_id,item_type,is_agent_option,sect_next,agent_personali
 0,name,1,description,-,-,-,自分が誰なのか、何が起きたのかも思い出せない。,You can't remember who you are or what happened before.
 0,name,2,description,-,-,-,*…ブルル*,*… bzzzt*
 0,name,3,description,-,-,-,あなたが腕につけているスマートウォッチから軽い振動が伝わってくる。,Your smartwatch vibrates.
-0,name,4,description,-,-,-,スクリーンに手を伸ばすと、突然、メッセージが現れる：,"You reach for the screen, and suddenly a voice pops-up:"
+0,name,4,description,-,-,-,スクリーンに手を伸ばすと、突然、メッセージが現れる：,"You reach for the screen, and suddenly a voice pops up:"
 0,name,5,agent_speech,-,-,orig,謎の声：「私はカイです。ここ、アルファ・リサーチ・センターであなたをサポートするAIアシスタントです。サポートを開始するには、声に出して名前を教えてください。」,"The Voice: ""Hello, my name is KAI. I'm your AI assistant here at Alpha Research Center. To begin, please state your name."""
 0,name,5,agent_speech,-,-,butler,「私はカイと申します。ここ、アルファ・リサーチ・センターであなたをサポートさせていただくAIアシスタントです。サポートを開始するために、お名前を伺ってもよろしいでしょうか？」,"""Hello, my name is KAI. I am your AI assistant here at Alpha Research Center. May I have your name, please?"""
 0,name,5,agent_speech,-,-,friend,「わたしはカイ！アルファ・リサーチ・センターで君のお手伝いをするAIアシスタントさ！君のことは何と呼べばいいかな？」,"""Hi! This is KAI. So good to see you today at Alpha Research Center! Is there a name I can call you by?”"

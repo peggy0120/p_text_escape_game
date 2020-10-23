@@ -106,6 +106,7 @@ $(document).ready(function () {
         $('button').fadeOut(2000)
 
         console.log("------- GAME START -------")
+        console.time("GAME")
 
         var next = []
 
@@ -153,10 +154,6 @@ $(document).ready(function () {
             loadBtns(section.sect_options)
         }
 
-        var fadeDelay = 600
-        showSection(fadeDelay)
-        console.log("next sections:" + next)
-
         $(".opt").click(function () {
 
             $(".opt").fadeOut(600)
@@ -183,6 +180,9 @@ $(document).ready(function () {
             endGame()
         })
 
+        var fadeDelay = 600
+        showSection(fadeDelay)
+        console.log("next sections:" + next)
     }
 
     function loadContent(sectionItems) {
@@ -286,7 +286,9 @@ $(document).ready(function () {
 
     function showSection(fadeDelay) {
 
-        $('div.item').each(function () {
+        var fadeObj = $('div.item')
+
+        fadeObj.each(function (index) {
 
             $(this).delay(fadeDelay).fadeIn(800)
 
@@ -294,24 +296,58 @@ $(document).ready(function () {
             //                scrollTop: $(this).offset().top
             //            }, 600);
 
-            fadeDelay += estReadtime($(this).text())
+            var estReadtime = calReadtime($(this).text())
+            fadeDelay += estReadtime
+            console.log(index + ": " + estReadtime + "ms")
         })
 
-        optionBtns.delay(fadeDelay - 3000).fadeIn(600)
+        fadeDelay -= 1000
+
+        optionBtns.delay(fadeDelay).fadeIn(800, function () {
+//            setTimeout(function () {
+//                optionBtns.children().first().trigger('click')
+//            }, 3800)
+        })
+
+
     }
 
-    function estReadtime(text) {
+    function calReadtime(text) {
 
         var readTime = 0
 
         if (language == "en") {
-            // 180 words per min
-            var wordCount = text.split(' ').length
-            readTime = wordCount / 3 * 1000 - 500
+
+            var word = text.split(' ')
+            var shortWordCount = 0
+            var longWordCount = 0
+
+            $.each(word, function (index) {
+                if (this.length < 3) {
+                    word.splice(index, 1)
+                    shortWordCount++
+                }
+                if (this.length > 8) {
+                    longWordCount++
+                }
+            })
+
+            // 265 words per min
+            readTime = word.length / 265 * 60 * 1000
+
+            // add 100ms for each word below 3 chars
+            readTime += shortWordCount * 100
+
+            // add 200ms additionally for each word above 8 chars
+            readTime += longWordCount * 200
+
         } else {
+
             // 500 chars per min
-            readTime = text.length / 8 * 1000
+            readTime = text.length / 500 * 60 * 1000
         }
+
+        readTime = readTime < 1000 ? 1000 : readTime
 
         return readTime
     }
@@ -321,6 +357,7 @@ $(document).ready(function () {
         container.delay(800).empty()
 
         console.log("------- END OF GAME -------")
+        console.timeEnd("GAME")
 
         var optMatch = 0
 
@@ -361,7 +398,6 @@ $(document).ready(function () {
 
         container.prepend("<h1 class='resultTitle'>You followed KAI's suggestion <span class='resultPct'>" + Math.round(resultPct * 100) + "%</span> of times.</h1>")
     }
-
 
     parseData('story.csv', cleanData)
 
