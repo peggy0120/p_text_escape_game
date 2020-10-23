@@ -36,6 +36,7 @@ $(document).ready(function () {
         console.log("ACTIVATE AUTO PROGRESS")
     }
 
+    var progCount = 0;
     var sect = "0"
 
     var storyItems = []
@@ -216,7 +217,8 @@ $(document).ready(function () {
 
     function updateProgress() {
         progress.width(progress.width() + progress.parent().width() / 18)
-        progLabel.text(result.length)
+        progCount++
+        progLabel.text(progCount)
     }
 
     function loadContent(sectionItems) {
@@ -327,41 +329,43 @@ $(document).ready(function () {
 
             $(this).delay(fadeDelay).fadeIn(800)
 
-            setTimeout(function () {
+            if (index == (fadeObj.length - 1)) {
 
-                if (isOutOfViewport(fadeItem[0]).bottom) {
+                $('.btn').delay(fadeDelay).fadeIn(800, function () {
+
+                    if (autoProg) {
+                        setTimeout(function () {
+                            optionBtns.children().first().trigger('click')
+                        }, 3800)
+                    }
+
+                })
+
+                setTimeout(function () {
+
                     $("body,html").animate({
-                        scrollTop: fadeItem.offset().top
-                    }, 800);
-                }
+                        scrollTop: $('.btn').first().offset().top
+                    }, 1000);
 
-            }, fadeDelay + 10)
+                }, fadeDelay + 10)
+            } else {
 
+                setTimeout(function () {
+
+                    if (isOutOfViewport(fadeItem[0]).bottom) {
+                        $("body,html").animate({
+                            scrollTop: fadeItem.offset().top
+                        }, 800);
+                    }
+
+                }, fadeDelay + 10)
+
+            }
 
             var estReadtime = calReadtime($(this).text())
             fadeDelay += estReadtime
             console.log(index + ": " + estReadtime + "ms")
         })
-
-        fadeDelay -= 1000
-
-        $('.btn').delay(fadeDelay).fadeIn(800, function () {
-
-            if (autoProg) {
-                setTimeout(function () {
-                    optionBtns.children().first().trigger('click')
-                }, 3800)
-            }
-
-        })
-
-        setTimeout(function () {
-
-            $("body,html").animate({
-                scrollTop: $('.btn').first().offset().top
-            }, 1000);
-
-        }, fadeDelay + 10)
     }
 
     /*!
