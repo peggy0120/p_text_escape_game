@@ -134,12 +134,15 @@ body {
     margin-bottom: 24px;
 }
 
+#option-buttons {
+    margin-top: 56px;
+    margin-bottom: 56px;
+}
+
 .btn-grid {
     display: grid;
     grid-template-columns: repeat(2, auto);
     column-gap: 32px;
-    margin-top: 56px;
-    margin-bottom: 56px;
 }
 
 .btn {
@@ -150,6 +153,11 @@ body {
     cursor: pointer;
     transition-property: color, background-color;
     transition-duration: 0.25s
+}
+
+.btn.final {
+    width: 100%;
+    margin-top: 80px;
 }
 
 .btn:hover,

@@ -36,7 +36,7 @@ $(document).ready(function () {
         console.log("ACTIVATE AUTO PROGRESS")
     }
 
-    var sect = "0"
+    var sect = "19"
 
     var storyItems = []
 
@@ -314,8 +314,8 @@ $(document).ready(function () {
 
         optionBtns.hide()
         optionBtns.append("<button class='btn final'>See Your Final Results</button>")
+        optionBtns.removeClass('btn-grid')
 
-        optionBtns.attr("grid-template-columns", "repeat(1, auto)")
     }
 
     function showSection(fadeDelay) {
