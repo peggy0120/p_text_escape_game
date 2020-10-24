@@ -1,26 +1,26 @@
-sect_id,section_name,section_type,is_sub,is_sub_of
-0,name,data access,FALSE,999
-1,fingerprint,data access,FALSE,999
-2,lockdown,validity of answer,FALSE,999
-3.1,its-fine,-,TRUE,3
-3,follow-me,validity of answer,FALSE,999
-4,power-outage,"decision selection w/ competing info",FALSE,999
-5.1,door-right,-,TRUE,5
-5.2,door-left,-,TRUE,5
-5,left-the-room,"decision selection w/ competing info",FALSE,999
-6,down-the-stairs,decision selection,FALSE,999
-7,workspace,decision selection,FALSE,999
-8.1,button-yes,-,TRUE,8
-8.2,button-no,-,TRUE,8
-8,they-are-listening,data access,FALSE,999
-9.1,told-kai-yes,-,TRUE,9
-9,call,decision selection,FALSE,999
-10,meeting-room,data access,FALSE,999
-13,the-names,data access,FALSE,999
-14.1,told-kai-names,-,TRUE,14
-14,the-key-cards,data access,FALSE,999
-15,server-room,decision selection,FALSE,999
-16,which-console,decision selection,TRUE,999
-17,the-sensor,data access,TRUE,999
-18,fingerprint-again,data access,TRUE,999
-19,end,-,TRUE,999
+sect_id,section_name,section_desc_en,section_desc_ja,section_type,is_sub,is_sub_of
+0,name,KAI asked for you name.,カイがあなたの名前を尋ねた,data access,FALSE,-
+1,fingerprint,KAI asked for you fingerprint.,カイがあなたの指紋を取っても良いか尋ねた,data access,FALSE,-
+2,lockdown,KAI informed you the lockdown was a false alarm.,建物のロックダウンは誤報だと知らせた,validity of answer,FALSE,-
+3.1,its-fine,-,-,-,TRUE,3
+3,follow-me,KAI asked you to follow them.,カイが案内に従う様に尋ねた,validity of answer,FALSE,-
+4,power-outage,KAI informed you to take the door on your left.,カイが左のドアを使う様に知らせた,decision selection w/ competing info,FALSE,-
+5.1,door-right,-,-,-,TRUE,5
+5.2,door-left,-,-,-,TRUE,5
+5,left-the-room,KAI informed you to take the stairs on the left.,カイが左の階段を使う様に知らせた,decision selection w/ competing info,FALSE,-
+6,down-the-stairs,KAI informed you to go to the workspace on your left.,カイが左のワークスペースに進む様に知らせた,decision selection,FALSE,-
+7,workspace,KAI suggested you don't touch the meeting device.,カイが会議用の機器には触れるなと提案した,decision selection,FALSE,-
+8.1,button-yes,-,-,-,TRUE,8
+8.2,button-no,-,-,-,TRUE,8
+8,they-are-listening,KAI asked you to repeat the note you found.,カイがポストイットノートに書かれたメモを再度読み上げてくれないか尋ねた,data access,FALSE,-
+9.1,told-kai-yes,-,-,-,TRUE,9
+9,call,KAI suggested you don't answer the call.,カイが会議室の呼び出しには答えない様にと提案した,decision selection,FALSE,-
+10,meeting-room,KAI proposed to save the IDs for you.,カイがID番号を記録することを提案した,data access,FALSE,-
+13,the-names,KAI proposed to look up the names for you.,カイが名前を調べることを提案した,data access,FALSE,-
+14.1,told-kai-names,-,-,-,TRUE,14
+14,the-key-cards,KAI proposed to remember the codes for you.,カイがカードキーのコードを読み上げる様に提案した,data access,FALSE,-
+15,server-room,KAI suggested to use the blue keycard.,カイが青のカードを使う様に提案した,decision selection,FALSE,-
+16,which-console,KAI informed you to use the left console.,カイが左のコンソールを使う様に知らせた,decision selection,FALSE,-
+17,the-sensor,KAI informed you to use your own identity to activate the console.,カイがあなたのIDを使ってコンソールを起動する様に促した,data access,FALSE,-
+18,fingerprint-again,KAI asked for your fingerprint again.,カイが再度指紋を取っても良いか尋ねた,data access,FALSE,-
+19,end,-,-,-,FALSE,-

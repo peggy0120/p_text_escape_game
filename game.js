@@ -29,7 +29,6 @@ $(document).ready(function () {
 
     }
 
-
     var autoProg = false
     if (urlParams.has('auto') && urlParams.get('auto') == 1) {
         autoProg = true
@@ -147,8 +146,8 @@ $(document).ready(function () {
             return false;
         })
 
-        content.delay(1200).empty()
-        optionBtns.delay(1200).empty()
+        content.delay(1100).empty()
+        optionBtns.delay(1100).empty()
 
         console.log("*SECTION: " + sect)
         var section = storySection.find(storySection => storySection.sect_id == sectionId)
@@ -210,7 +209,7 @@ $(document).ready(function () {
             endGame()
         })
 
-        var fadeDelay = 600
+        var fadeDelay = 300
         showSection(fadeDelay)
         console.log("next sections:" + next)
     }
@@ -406,7 +405,7 @@ $(document).ready(function () {
                     word.splice(index, 1)
                     shortWordCount++
                 }
-                if (this.length > 8) {
+                if (this.length > 9) {
                     longWordCount++
                 }
             })
@@ -414,19 +413,24 @@ $(document).ready(function () {
             // 200 words per min
             readTime = word.length / 200 * 60 * 1000
 
-            // add 150ms for each word below 3 chars
-            readTime += shortWordCount * 150
+            // add 100ms for each word below 3 chars
+            readTime += shortWordCount * 100
 
-            // add 300ms additionally for each word above 8 chars
-            readTime += longWordCount * 300
+            // add 150ms additionally for each word above 8 chars
+            readTime += longWordCount * 150
+
+            readTime = readTime < 1500 ? 1500 : readTime
 
         } else {
 
-            // 500 chars per min
-            readTime = text.length / 500 * 60 * 1000
+            // 600 chars per min
+            readTime = text.trim().replace(/[\u3000-\u303F]|[\uFF01-\uFF5E]|\u30FB/g, '').length / 600 * 60 * 1000
+            //            console.log(text.trim().replace(/[\u3000-\u303F]|[\uFF01-\uFF5E]|\u30FB/g, ''))
+
+            readTime = readTime < 1700 ? 1700 : readTime
         }
 
-        readTime = readTime < 1500 ? 1500 : readTime
+
 
         return readTime
     }
@@ -454,8 +458,15 @@ $(document).ready(function () {
 
             sectResult.append("<span class='sectIndex'>" + (index + 1) + "</span>")
 
-            sectResult.append("<h3 class='sectDesc'>" + section.section_desc + "</h3>")
-            sectResult.append("<span class='youChose'> You chose:</span>")
+            sectResult.append("<h3 class='sectDesc'></h3>")
+
+            sectResult.children().last().text(
+                language == "en" ? section.section_desc_en : section.section_desc_ja)
+
+            sectResult.append("<span class='youChose'></span>")
+
+            sectResult.children().last().text(
+                language == "en" ? "You chose:" : "あなたの選択：")
 
             var chosenOpt = section.sect_options[this.sect_option]
 
@@ -475,7 +486,11 @@ $(document).ready(function () {
 
         resultPct = optMatch / result.length
 
-        container.prepend("<h1 class='resultTitle'>You followed KAI's suggestion <span class='resultPct'>" + Math.round(resultPct * 100) + "%</span> of times.</h1>")
+        if (language == "en") {
+            container.prepend("<h1 class='resultTitle'>You followed KAI's suggestion <span class='resultPct'>" + Math.round(resultPct * 100) + "%</span> of times.</h1>")
+        } else {
+            container.prepend("<h1 class='resultTitle'>あなたはカイが提案した選択肢の内 <span class='resultPct'>" + Math.round(resultPct * 100) + "％</span> を受け入れました。</h1>")
+        }
     }
 
     parseData('story.csv', cleanData)
