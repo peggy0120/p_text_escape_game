@@ -138,16 +138,7 @@ $(document).ready(function () {
 
     function loadSection(sectionId) {
 
-        $('div.item').fadeOut(1000)
-        $('button').fadeOut(1000, function () {
-            $("html, body").animate({
-                scrollTop: 0
-            }, "slow");
-            return false;
-        })
-
-        content.delay(1100).empty()
-        optionBtns.delay(1100).empty()
+        removePreSect()
 
         console.log("*SECTION: " + sect)
         var section = storySection.find(storySection => storySection.sect_id == sectionId)
@@ -212,6 +203,20 @@ $(document).ready(function () {
         var fadeDelay = 300
         showSection(fadeDelay)
         console.log("next sections:" + next)
+    }
+
+    function removePreSect() {
+
+        $('div.item').fadeOut(1000)
+        $('button').fadeOut(1000, function () {
+            $("html, body").animate({
+                scrollTop: 0
+            }, "slow");
+            return false;
+        })
+
+        content.delay(1100).empty()
+        optionBtns.delay(1100).empty()
     }
 
     function updateProgress() {
@@ -425,12 +430,10 @@ $(document).ready(function () {
 
             // 600 chars per min
             readTime = text.trim().replace(/[\u3000-\u303F]|[\uFF01-\uFF5E]|\u30FB/g, '').length / 600 * 60 * 1000
-            //            console.log(text.trim().replace(/[\u3000-\u303F]|[\uFF01-\uFF5E]|\u30FB/g, ''))
+            console.log(text.trim().replace(/[\u3000-\u303F]|[\uFF01-\uFF5E]|\u30FB/g, ''))
 
-            readTime = readTime < 1700 ? 1700 : readTime
+            readTime = readTime < 1200 ? 1200 : readTime
         }
-
-
 
         return readTime
     }
