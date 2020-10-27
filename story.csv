@@ -106,8 +106,8 @@ sect_id,section_name,item_id,item_type,is_agent_option,sect_next,agent_personali
 9,call,2,agent_speech,-,-,orig,カイ：「この建物内の通信システムは全て監視されています。不正な通信が交わされると、より厳重なシステム・ロックダウンを招きます。」,"KAI: ""All the communication systems in this building are monitored. Having unauthorized communication can trigger a higher level of system lockdown."""
 9,call,2,agent_speech,-,-,butler,「この建物内の通信システムは全て監視されております。不正な通信が交わされると、より厳重なシステム・ロックダウンを招きます。」,"""All the communication systems in this building are monitored. I would not recommend having unauthorized communication, as doing so can trigger a higher level of system lockdown."
 9,call,2,agent_speech,-,-,friend,「この施設の通信システムは全部監視されているからね。下手に触ったら大変な目にあうぞ。」,“That call has to be monitored like all communication systems around here. Let’s not have any unauthorized communication. The system may end up increasing the level of lockdown.”
-9,call,3,option,true,10,-,[[呼び出しに応じる]],[[Go answer the call]]
-9,call,4,option,false,10,-,[[呼び出しには応じず、接続を切る]],[[Go hang up the call]]
+9,call,3,option,false,10,-,[[呼び出しに応じる]],[[Go answer the call]]
+9,call,4,option,true,10,-,[[呼び出しには応じず、接続を切る]],[[Go hang up the call]]
 10,meeting-room,0,description,-,-,-,部屋に駆け込んで音をたどるが、場所を特定する前に急に止んでしまう。,"Running into the room, you try to find where the ringing sound comes from, but it stops abruptly before you can locate it."
 10,meeting-room,1,description,-,-,-,しかし、テーブルの反対側にある 【プロジェクト・ターミナス（最終プロジェクト）】とラベルの貼られた箱とフォルダーが目に入る。,"A box and a folder labeled ""Project Terminus"" on the other end of the table attract your attention, however."
 10,meeting-room,2,description,-,-,-,フォルダーを開ける。,You open the folder.
