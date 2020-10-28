@@ -188,7 +188,6 @@ $(document).ready(function () {
                 console.log("user clicked right opt")
             }
 
-
             console.log(result[result.length - 1])
 
             loadSection(sect)
@@ -334,15 +333,7 @@ $(document).ready(function () {
 
             if (index == (fadeObj.length - 1)) {
 
-                $('.btn').delay(fadeDelay).fadeIn(800, function () {
-
-                    if (autoProg) {
-                        setTimeout(function () {
-                            optionBtns.children().first().trigger('click')
-                        }, 3800)
-                    }
-
-                })
+                $('.btn').delay(fadeDelay).fadeIn(800)
 
                 setTimeout(function () {
 
@@ -351,6 +342,7 @@ $(document).ready(function () {
                     }, 1000);
 
                 }, fadeDelay + 10)
+
             } else {
 
                 setTimeout(function () {
@@ -363,12 +355,19 @@ $(document).ready(function () {
 
                 }, fadeDelay + 10)
 
+                var estReadtime = calReadtime($(this).text())
+                fadeDelay += estReadtime
+                console.log(index + ": " + estReadtime + "ms")
+
             }
 
-            var estReadtime = calReadtime($(this).text())
-            fadeDelay += estReadtime
-            console.log(index + ": " + estReadtime + "ms")
         })
+
+        if (autoProg) {
+            setTimeout(function () {
+                optionBtns.children().first().trigger('click')
+            }, fadeDelay + 3000)
+        }
     }
 
     /*!
@@ -430,7 +429,6 @@ $(document).ready(function () {
 
             // 600 chars per min
             readTime = text.trim().replace(/[\u3000-\u303F]|[\uFF01-\uFF5E]|\u30FB/g, '').length / 600 * 60 * 1000
-            console.log(text.trim().replace(/[\u3000-\u303F]|[\uFF01-\uFF5E]|\u30FB/g, ''))
 
             readTime = readTime < 1200 ? 1200 : readTime
         }
