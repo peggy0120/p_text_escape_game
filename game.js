@@ -35,6 +35,12 @@ $(document).ready(function () {
         console.log("ACTIVATE AUTO PROGRESS")
     }
 
+    var noFade = false
+    if (urlParams.has('noFade') && urlParams.get('noFade') == 1) {
+        noFade = true
+        console.log("FADE DISABLED")
+    }
+
     var progCount = 0;
     var sect = "0"
 
@@ -199,7 +205,7 @@ $(document).ready(function () {
             endGame()
         })
 
-        var fadeDelay = 300
+        var fadeDelay = noFade ? 0 : 300
         showSection(fadeDelay)
         console.log("next sections:" + next)
     }
@@ -323,23 +329,24 @@ $(document).ready(function () {
 
     function showSection(fadeDelay) {
 
+        var fadeTime = noFade ? 0 : 800
         var fadeObj = $('div.item')
 
         fadeObj.each(function (index) {
 
             var fadeItem = $(this)
 
-            $(this).delay(fadeDelay).fadeIn(800)
+            $(this).delay(fadeDelay).fadeIn(fadeTime)
 
             if (index == (fadeObj.length - 1)) {
 
-                $('.btn').delay(fadeDelay).fadeIn(800)
+                $('.btn').delay(fadeDelay).fadeIn(fadeTime)
 
                 setTimeout(function () {
 
                     $("body,html").animate({
                         scrollTop: $('.btn').first().offset().top
-                    }, 1000);
+                    }, fadeTime + 200);
 
                 }, fadeDelay + 10)
 
@@ -350,7 +357,7 @@ $(document).ready(function () {
                     if (isOutOfViewport(fadeItem[0]).bottom) {
                         $("body,html").animate({
                             scrollTop: fadeItem.offset().top
-                        }, 800);
+                        }, fadeTime);
                     }
 
                 }, fadeDelay + 10)
@@ -398,39 +405,42 @@ $(document).ready(function () {
 
         var readTime = 0
 
-        if (language == "en") {
+        if (!noFade) {
 
-            var word = text.split(' ')
-            var shortWordCount = 0
-            var longWordCount = 0
+            if (language == "en") {
 
-            $.each(word, function (index) {
-                if (this.length < 3) {
-                    word.splice(index, 1)
-                    shortWordCount++
-                }
-                if (this.length > 9) {
-                    longWordCount++
-                }
-            })
+                var word = text.split(' ')
+                var shortWordCount = 0
+                var longWordCount = 0
 
-            // 200 words per min
-            readTime = word.length / 200 * 60 * 1000
+                $.each(word, function (index) {
+                    if (this.length < 3) {
+                        word.splice(index, 1)
+                        shortWordCount++
+                    }
+                    if (this.length > 9) {
+                        longWordCount++
+                    }
+                })
 
-            // add 100ms for each word below 3 chars
-            readTime += shortWordCount * 100
+                // 200 words per min
+                readTime = word.length / 200 * 60 * 1000
 
-            // add 150ms additionally for each word above 8 chars
-            readTime += longWordCount * 150
+                // add 100ms for each word below 3 chars
+                readTime += shortWordCount * 100
 
-            readTime = readTime < 1500 ? 1500 : readTime
+                // add 150ms additionally for each word above 8 chars
+                readTime += longWordCount * 150
 
-        } else {
+                readTime = readTime < 1500 ? 1500 : readTime
 
-            // 600 chars per min
-            readTime = text.trim().replace(/[\u3000-\u303F]|[\uFF01-\uFF5E]|\u30FB/g, '').length / 600 * 60 * 1000
+            } else {
 
-            readTime = readTime < 1200 ? 1200 : readTime
+                // 600 chars per min
+                readTime = text.trim().replace(/[\u3000-\u303F]|[\uFF01-\uFF5E]|\u30FB/g, '').length / 600 * 60 * 1000
+
+                readTime = readTime < 1200 ? 1200 : readTime
+            }
         }
 
         return readTime
